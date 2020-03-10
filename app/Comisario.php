@@ -12,6 +12,6 @@ class Comisario extends Model
      * @var array
      */
     protected $fillable = [
-        'full_name',
+        'full_name'
     ];
 }

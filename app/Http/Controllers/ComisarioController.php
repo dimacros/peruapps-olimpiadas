@@ -14,7 +14,9 @@ class ComisarioController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json([
+            'data' => Comisario::all()
+        ]);
     }
 
     /**
