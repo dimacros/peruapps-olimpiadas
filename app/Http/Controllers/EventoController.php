@@ -14,7 +14,9 @@ class EventoController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json([
+            'data' => Evento::all()
+        ]);
     }
 
     /**
@@ -25,7 +27,19 @@ class EventoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'complejo_deportivo_id' => 'required|int|exists:complejos_deportivos,id',
+            'start_date' => 'required|date',
+            'duration_in_hours' => 'required|int|min:1'
+        ]);
+
+        Evento::create([
+            'complejo_deportivo_id' => $request->get('complejo_deportivo_id'),
+            'start_date' => $request->get('start_date'),
+            'duration_in_hours' => $request->get('duration_in_hours')
+        ]);
+
+        return response('', 201);
     }
 
     /**
@@ -36,7 +50,7 @@ class EventoController extends Controller
      */
     public function show(Evento $evento)
     {
-        //
+        return response()->json($evento->toArray());
     }
 
     /**
@@ -48,7 +62,19 @@ class EventoController extends Controller
      */
     public function update(Request $request, Evento $evento)
     {
-        //
+        $request->validate([
+            'complejo_deportivo_id' => 'required|int|exists:complejos_deportivos,id',
+            'start_date' => 'required|date',
+            'duration_in_hours' => 'required|int|min:1'
+        ]);
+
+        $evento->update([
+            'complejo_deportivo_id' => $request->get('complejo_deportivo_id'),
+            'start_date' => $request->get('start_date'),
+            'duration_in_hours' => $request->get('duration_in_hours')
+        ]);
+
+        return response()->json($evento->toArray());
     }
 
     /**
@@ -59,6 +85,8 @@ class EventoController extends Controller
      */
     public function destroy(Evento $evento)
     {
-        //
+        $evento->delete();
+
+        return response('', 204);
     }
 }
