@@ -13,8 +13,16 @@ class CreateComplejosDeportivosTable extends Migration
      */
     public function up()
     {
-        Schema::table('complejos_deportivos', function (Blueprint $table) {
-            //
+        Schema::create('complejos_deportivos', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('sede_id');
+            $table->string('name');
+            $table->string('location');
+            $table->string('head_of_organization');
+            $table->decimal('total_occupied_area');
+            $table->timestamps();
+
+            $table->foreign('sede_id')->references('id')->on('sedes');
         });
     }
 
@@ -25,8 +33,6 @@ class CreateComplejosDeportivosTable extends Migration
      */
     public function down()
     {
-        Schema::table('complejos_deportivos', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('complejos_deportivos');
     }
 }

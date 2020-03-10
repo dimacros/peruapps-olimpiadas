@@ -13,8 +13,11 @@ class CreateSedesTable extends Migration
      */
     public function up()
     {
-        Schema::table('sedes', function (Blueprint $table) {
-            //
+        Schema::create('sedes', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->decimal('approximate_badget');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +28,6 @@ class CreateSedesTable extends Migration
      */
     public function down()
     {
-        Schema::table('sedes', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('sedes');
     }
 }

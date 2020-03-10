@@ -13,8 +13,14 @@ class CreateEventoEquipamentosTable extends Migration
      */
     public function up()
     {
-        Schema::table('evento_equipamentos', function (Blueprint $table) {
-            //
+        Schema::create('evento_equipamentos', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('evento_id');
+            $table->char('unit_of_measure', 3);
+            $table->string('description');
+            $table->integer('quantity');
+
+            $table->foreign('evento_id')->references('id')->on('eventos');
         });
     }
 
@@ -25,8 +31,6 @@ class CreateEventoEquipamentosTable extends Migration
      */
     public function down()
     {
-        Schema::table('evento_equipamentos', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('evento_equipamentos');
     }
 }

@@ -13,8 +13,14 @@ class CreateEventosTable extends Migration
      */
     public function up()
     {
-        Schema::table('eventos', function (Blueprint $table) {
-            //
+        Schema::create('eventos', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('complejo_deportivo_id');
+            $table->dateTime('start_date');
+            $table->integer('duration_in_hours');
+            $table->timestamps();
+
+            $table->foreign('complejo_deportivo_id')->references('id')->on('complejos_deportivos');
         });
     }
 
@@ -25,8 +31,6 @@ class CreateEventosTable extends Migration
      */
     public function down()
     {
-        Schema::table('eventos', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('eventos');
     }
 }

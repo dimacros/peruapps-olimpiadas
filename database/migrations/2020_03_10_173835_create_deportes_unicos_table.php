@@ -13,8 +13,12 @@ class CreateDeportesUnicosTable extends Migration
      */
     public function up()
     {
-        Schema::table('deportes_unicos', function (Blueprint $table) {
-            //
+        Schema::create('deportes_unicos', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('complejo_deportivo_id');
+            $table->string('deport_name');
+
+            $table->foreign('complejo_deportivo_id')->references('id')->on('complejos_deportivos');
         });
     }
 
@@ -25,8 +29,6 @@ class CreateDeportesUnicosTable extends Migration
      */
     public function down()
     {
-        Schema::table('deportes_unicos', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('deportes_unicos');
     }
 }

@@ -13,8 +13,14 @@ class CreatePolideportivoDeportesTable extends Migration
      */
     public function up()
     {
-        Schema::table('polideportivo_deportes', function (Blueprint $table) {
-            //
+        Schema::create('polideportivo_deportes', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('polideportivo_id');
+            $table->string('deport_name');
+            $table->decimal('total_occupied_area');
+            $table->string('location_indicator');
+
+            $table->foreign('polideportivo_id')->references('id')->on('polideportivos');
         });
     }
 
@@ -25,8 +31,6 @@ class CreatePolideportivoDeportesTable extends Migration
      */
     public function down()
     {
-        Schema::table('polideportivo_deportes', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('polideportivo_deportes');
     }
 }

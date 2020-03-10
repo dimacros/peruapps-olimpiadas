@@ -13,8 +13,10 @@ class CreateComisariosTable extends Migration
      */
     public function up()
     {
-        Schema::table('comisarios', function (Blueprint $table) {
-            //
+        Schema::create('comisarios', function (Blueprint $table) {
+            $table->id();
+            $table->string('full_name');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +27,6 @@ class CreateComisariosTable extends Migration
      */
     public function down()
     {
-        Schema::table('comisarios', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('comisarios');
     }
 }

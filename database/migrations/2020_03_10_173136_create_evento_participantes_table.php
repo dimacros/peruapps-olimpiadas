@@ -13,8 +13,12 @@ class CreateEventoParticipantesTable extends Migration
      */
     public function up()
     {
-        Schema::table('evento_participantes', function (Blueprint $table) {
-            //
+        Schema::create('evento_participantes', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('evento_id');
+            $table->string('full_name');
+
+            $table->foreign('evento_id')->references('id')->on('eventos');
         });
     }
 
@@ -25,8 +29,6 @@ class CreateEventoParticipantesTable extends Migration
      */
     public function down()
     {
-        Schema::table('evento_participantes', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('evento_participantes');
     }
 }
