@@ -12,6 +12,6 @@ class ComisarioSeeder extends Seeder
      */
     public function run()
     {
-        factory(Comisario::class, 50);
+        factory(Comisario::class, 50)->create();
     }
 }
