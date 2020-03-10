@@ -1,5 +1,6 @@
 <?php
 
+use App\Comisario;
 use Illuminate\Database\Seeder;
 
 class ComisarioSeeder extends Seeder
@@ -11,6 +12,6 @@ class ComisarioSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(Comisario::class, 50);
     }
 }
